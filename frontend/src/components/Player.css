@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.player-body {
+  font-family: 'Inter', sans-serif;
+  background: #000;
+  color: #fff;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.player-body::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: moveParticlesPlayer 60s linear infinite;
+  z-index: 0;
+}
+
+@keyframes moveParticlesPlayer {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-200px, -200px); }
+}
+
+.dashboard-container {
+  background: #000;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.dashboard-content {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  width: 100%;
+  height: 100%;
+}
+
+.dashboard-content.active { opacity: 1; }
+
+.logout-btn {
+  position: fixed;
+  top: 5px;
+  right: 20px;
+  background-color: rgba(229, 62, 62, 0.5);
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  font-weight: 600;
+  z-index: 2000;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover { background-color: rgba(229, 62, 62, 0.8); }
+
+#player-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #000;
+}
+
+#player-section video,
+#player-section iframe,
+#player-section img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-color: #000;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+}
+
+#yt-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  background: #000;
+}
+
+#yt-container iframe,
+#yt-container div {
+  position: absolute !important;
+  top: -10vh !important;
+  left: -10vw !important;
+  width: 120vw !important;
+  height: 120vh !important;
+  border: none !important;
+  pointer-events: none !important;
+  transform: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.footer-uuid {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  font-family: monospace;
+  color: #fff;
+  opacity: 0.4;
+  z-index: 2000;
+  font-size: 0.8rem;
+}
+
+.header-logo {
+  position: fixed;
+  top: 5px;
+  left: 20px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  opacity: 0.5;
+  z-index: 2000;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 2500;
+}
+
+#debug-info {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  font-size: 10px;
+  color: lime;
+  z-index: 4000;
+  background: rgba(0,0,0,0.5);
+  display: none; 
+}
+
+@keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+#no-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 70%);
+}
+
+.no-content-inner {
+  text-align: center;
+  animation: fadeInContent 0.8s ease;
+  padding: 2rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  max-width: 500px;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1.5rem auto;
+}
+
+.no-content-inner h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: #fff;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+}
+
+.no-content-inner p {
+  color: #cbd5e1;
+  font-size: 1.2rem;
+  margin: 0 0 0.75rem 0;
+}
+
+.no-content-inner small {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  display: block;
+}
+
+@keyframes fadeInContent {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
