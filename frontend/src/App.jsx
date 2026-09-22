@@ -1,20 +1,29 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './components/Login';
-import Player from './components/Player';
+import TVPlayer from './components/TVPlayer';
 import Admin from './components/Admin';
-import './index.css';
+import './App.css';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/player" element={<Player />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="*" element={<Navigate to="/login" replace />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <div className="app-container">
+                <Routes>
+                    {/* Redirigir raíz a /tv */}
+                    <Route path="/" element={<Navigate to="/tv" replace />} />
+                    
+                    {/* Ruta del Televisor (Pública) */}
+                    <Route path="/tv" element={<TVPlayer />} />
+                    
+                    {/* Rutas de Administración (Pública nuevamente) */}
+                    <Route path="/admin/*" element={<Admin />} />
+
+                    {/* Fallback */}
+                    <Route path="*" element={<Navigate to="/tv" replace />} />
+                </Routes>
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;

@@ -1,5 +1,19 @@
 
 services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: tv
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-Gs1$2099Dr#24zXcv}
+      POSTGRES_DB: nexus_tv
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./nexus_tv_20260919_091327.dump:/tmp/nexus_tv.dump
+      - ./migrations:/docker-entrypoint-initdb.d
+
   backend:
     build:
       context: .
@@ -11,6 +25,13 @@ services:
     restart: unless-stopped
     environment:
       - NODE_ENV=production
+      - PG_HOST=db
+      - PG_PORT=5432
+      - PG_USER=tv
+      - PG_PASSWORD=${PG_PASSWORD:-Gs1$2099Dr#24zXcv}
+      - PG_DATABASE=nexus_tv
+    depends_on:
+      - db
 
   frontend:
     build:
@@ -21,3 +42,5 @@ services:
     restart: unless-stopped
     depends_on:
       - backend
+volumes:
+  pgdata:

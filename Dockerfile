@@ -3,6 +3,7 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install --omit=dev
 COPY nx_tv.js ./
+COPY src ./src
 
 FROM node:20-alpine
 RUN apk add --no-cache ffmpeg
